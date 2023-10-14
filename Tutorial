@@ -1,0 +1,81 @@
+*)  Introduction
+
+    *)Building a software project typically consists of such tasks as downloading dependencies, putting additional jars
+      on a classpath, compiling source code into binary code, running tests, packaging compiled code into deployable
+      artifacts such as JAR, WAR, and ZIP files, and deploying these artifacts to an application server or repository.
+
+*) Why Use Maven?
+
+    *)simple project setup that follows best practices:-
+       Maven tries to avoid as much configuration as possible, by supplying project templates (named archetypes)
+    *) dependency management:-
+       it includes automatic updating, downloading and validating the compatibility, as well as reporting the 
+       dependency closures (known also as transitive dependencies)
+    *) isolation between project dependencies and plugins:-
+        with Maven, project dependencies are retrieved from the dependency repositories while any plugin’s
+        dependencies are retrieved from the plugin repositories, resulting in fewer conflicts when plugins
+        start to download additional dependencies
+    *) central repository system:- 
+        project dependencies can be loaded from the local file system or public repositories, such as Maven 
+        Central
+
+*) Project Object Model
+
+    *) The configuration of a Maven project is done via a Project Object Model (POM), represented by a pom.xml file. The POM describes the project,
+       manages dependencies, and configures plugins for building the software.
+    *) The POM also defines the relationships among modules of multi-module projects. Let’s look at the basic structure of a typical POM file
+
+*) Maven Build Lifecycles
+
+   *) Every Maven build follows a specified lifecycle. You can execute several build lifecycle goals, including the ones to compile the project’s code, 
+     create a package, and install the archive file in the local Maven dependency repository
+   *) Lifecycle Phases:-
+      The following list shows the most important Maven lifecycle phases:
+           # validate – checks the correctness of the project
+           # compile – compiles the provided source code into binary artifacts
+           # test – executes unit tests
+           # package – packages compiled code into an archive file
+           # integration-test – executes additional tests, which require the packaging
+           # verify – checks if the package is valid
+           # install – installs the package file into the local Maven repository
+           # deploy – deploys the package file to a remote server or repository
+           # clean - cleans up artifacts created by prior builds
+           # site - generates site documentation for this project
+    *) Plugins and Goals:-
+        *) A Maven plugin is a collection of one or more goals. Goals are executed in phases, which helps to determine 
+         the order in which the goals are executed
+        *) The rich list of plugins that are officially supported by Maven is available here. There is also an interesting article on how to build an
+         executable JAR on Baeldung using various plugins
+        *) To go through any one of the above phases, we just have to call one command
+                     $ mvn <phase>
+        *) For example, mvn clean install will remove the previously created jar/war/zip files and compiled classes (clean) and execute all the phases
+          necessary to install the new archive (install)
+
+ *) Compiling and Packaging a Project
+
+      *) The next step is to compile the project
+             $  mvn compile
+      *) Maven will run through all lifecycle phases needed by the compile phase to build the project’s sources. If you want to run only the test phase, 
+         you can use
+             $ mvn test
+      *) Now let’s invoke the package phase, which will produce the compiled archive jar file
+             $ mvn package
+
+*) To execute the application, we run the following command
+            $ mvn exec:java
+
+*) Building a Maven Project
+
+     *) To build a Maven project, we need to execute one of the lifecycles by running one of their phases
+              $ mvn deploy
+     *) This will execute the entire default lifecycle. Alternatively, we can stop at the install phase
+              $ mvn install
+     *) But usually, we’ll clean the project first by running the clean lifecycle before the new build
+              $ mvn clean install
+     *) We can also run only a specific goal of the plugin
+             $ mvn compiler:compile
+
+##  Note that if we try to build a Maven project without specifying a phase or goal, we’ll get an error
+    [ERROR] No goals have been specified for this build. You must specify a valid lifecycle phase or a goal
+
+
