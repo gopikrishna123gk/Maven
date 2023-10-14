@@ -1,0 +1,47 @@
+ Prerequisites
+
+     *) Maven is written in Java. So, to run Maven, we need a system that has Java installed and configured
+        properly.
+     *) We can download an OS-compatible Java JDK from Oracle’s download site, for example.  It’s recommended
+        to install it to a pathname without spaces.
+     *) Once Java is installed, we need to ensure that the commands from the Java JDK are in our PATH environment
+        variable.
+     *) To do so, we will run the command below to get the currently installed version info
+           $ java -version
+
+*)  Installing Maven on Windows
+
+     *) To install Maven on Windows, we head over to the Apache Maven site to download the latest version and
+        select the Maven zip file, for example, apache-maven-3.8.4-bin.zip
+     *) Then, we unzip it to the folder where we want Maven to live
+
+*) Adding Maven to the Environment Path
+
+    *) We add both M2_HOME and MAVEN_HOME variables to the Windows environment using system properties 
+       and point them to our Maven folder.
+    *) Then, we update the PATH variable by appending the Maven bin folder — %M2_HOME%\bin — 
+       so that we can run the Maven command everywhere
+    *) To verify it, we run
+          $ mvn -version
+
+*) Installing Maven on Linux
+
+    *) To install Maven on the Linux operating system, we download the latest version from the Apache Maven site
+       and select the Maven binary tar.gz file, for example, apache-maven-3.8.4-bin.tar.gz.
+    *) Redhat, Ubuntu, and many other Linux distribution are using the BASH as their default shell
+    *) First, let’s create a location for Maven
+         $ mkdir -p /usr/local/apache-maven/apache-maven-3.8.4
+    *)  Then, we extract the archive to our Maven location
+         $ tar -xvf apache-maven-3.8.4-bin.tar.gz -C /usr/local/apache-maven/apache-maven-3.8.4
+
+*)  Adding Maven to the Environment Path
+
+    *) We open the command terminal and edit the .bashrc file using the below command
+               $ nano ~/.bashrc
+    *) Next, let’s add Maven-specific lines to the file
+          export M2_HOME=/usr/local/apache-maven/apache-maven-3.8.4 
+          export M2=$M2_HOME/bin 
+          export MAVEN_OPTS=-Xms256m -Xmx512m 
+          export PATH=$M2:$PATH
+      
+
