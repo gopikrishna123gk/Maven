@@ -1,0 +1,40 @@
+*) This command cleans the Maven project by deleting the target directory
+       $ mvn clean
+*) This command compiles the Java source classes of the Maven project
+       $ mvn compiler:compile
+*)  This command compiles the test classes of the Maven project
+       $ mvn compiler:testCompile
+*) This command builds the Maven project and packages it into a JAR, WAR, etc.
+       $ mvn package
+*) This command builds the Maven project and installs the project files (JAR, WAR, pom.xml, etc.) to the local repository
+       $ mvn install
+*) This command deploys the artifact to the remote repository
+       $ mvn deploy
+*) This command validates the Maven project to ensure that everything is correct and all the necessary information is available
+       $ mvn validate
+*) This command generates the dependency tree of the Maven project
+       $ mvn dependency:tree
+*) This command analyzes the maven project to identify the unused declared and used undeclared dependencies
+       $ mvn dependency:analyze
+*) This command generates skeleton Maven projects of different types, such as JAR, web application, Maven site, etc:
+       $ mvn archetype:generate
+*) This command generates a site for the project
+       $ mvn site:site
+   ## You will notice a site directory in the target directory after executing this command.
+       /Users/sammy/Desktop/maven-examples/maven-example-jar/target/site/index.html
+*) This command runs the test cases of the project
+      $ mvn test
+*) This command compiles the source Java classes of the project
+      $ mvn compile
+*) This command builds the project, runs all the test cases and run any checks on the results of the integration tests to ensure quality criteria are met
+      $ mvn verify
+*) This command-line option displays the Maven version information
+      $ mvn -v
+*) This command-line option prints the Maven version and then continues with the build
+      $ mvn -V package
+*) This command-line option applies the skipTests system property to skip the unit test cases from the build cycle
+      $ mvn -DskipTests package
+*) You can also skip the test cases execution
+      $ mvn -Dmaven.test.skip=true package
+*) This command-line option tells Maven to run parallel builds using the specified thread count
+      $ mvn -T 4 clean install
