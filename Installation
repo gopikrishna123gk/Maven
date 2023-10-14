@@ -26,22 +26,50 @@
 
 *) Installing Maven on Linux
 
-    *) To install Maven on the Linux operating system, we download the latest version from the Apache Maven site
+      *) To install Maven on the Linux operating system, we download the latest version from the Apache Maven site
        and select the Maven binary tar.gz file, for example, apache-maven-3.8.4-bin.tar.gz.
-    *) Redhat, Ubuntu, and many other Linux distribution are using the BASH as their default shell
-    *) First, let’s create a location for Maven
+      *) Redhat, Ubuntu, and many other Linux distribution are using the BASH as their default shell
+      *) First, let’s create a location for Maven
          $ mkdir -p /usr/local/apache-maven/apache-maven-3.8.4
-    *)  Then, we extract the archive to our Maven location
+      *)  Then, we extract the archive to our Maven location
          $ tar -xvf apache-maven-3.8.4-bin.tar.gz -C /usr/local/apache-maven/apache-maven-3.8.4
 
-*)  Adding Maven to the Environment Path
+  *)  Adding Maven to the Environment Path
 
-    *) We open the command terminal and edit the .bashrc file using the below command
+      *) We open the command terminal and edit the .bashrc file using the below command
                $ nano ~/.bashrc
-    *) Next, let’s add Maven-specific lines to the file
+      *) Next, let’s add Maven-specific lines to the file
           export M2_HOME=/usr/local/apache-maven/apache-maven-3.8.4 
           export M2=$M2_HOME/bin 
           export MAVEN_OPTS=-Xms256m -Xmx512m 
           export PATH=$M2:$PATH
-      
+      *) Once we save the file, we can reload the environment configuration without restarting
+           $ source ~/.bashrc
+      *)  we can verify if Maven has been added
+          $ mvn -version
+
+*) Installing Maven on Ubuntu
+
+    *) In a terminal, we run (apt-cache) search maven to get all the available Maven packages
+            $ apt-cache search maven
+    *) We run the command sudo apt-get install maven to install the latest Maven
+            $ sudo apt-get install maven
+    *)  verification
+            $ mvn -version
+
+*) Amazon Linux EC2
+
+     *) Install Apache Maven on your EC2 instance. First, enter the following to add a repository with a Maven package
+         $ sudo wget https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d
+           /epel-apache-maven.repo
+     *) Enter the following to set the version number for the packages
+         $ sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+     *) Then you can use yum to install Maven
+         $ sudo yum install -y apache-maven
+     *) The Gremlin libraries require Java 8. Enter the following to install Java 8 on your EC2 instance
+          $ sudo yum install java-1.8.0-devel
+     *) Enter the following to set Java 8 as the default runtime on your EC2 instance
+           $ sudo /usr/sbin/alternatives --config java
+     *)  Enter the following to set Java 8 as the default compiler on your EC2 instance
+           $sudo /usr/sbin/alternatives --config javac
 
